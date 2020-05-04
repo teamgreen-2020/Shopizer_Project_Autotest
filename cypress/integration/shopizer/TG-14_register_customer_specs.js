@@ -15,6 +15,7 @@ describe('TG-14 Som en kund vill jag kunna registrera mig', () => {
             //selct Register
             .get('#registerLink')
             .should('have.text', 'Register')
+            .and('have.attr', 'onclick', 'javascript:location.href=\'/shop/customer/registration.html\';')
             .click()
     })
 
