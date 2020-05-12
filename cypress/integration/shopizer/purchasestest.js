@@ -1,22 +1,31 @@
 /// <reference types="cypress" />
+//As a customer I want to be able to make a purchase without being logged in
 
+//Open page
 describe('Product Purchase Test', function () 
 {
     it('Open page', function () {
-        cy.visit('http://localhost:8080/shop');
+        cy.visit('http://localhost:8080/shop/');
       
     })
+    //Add to cart 
     it ('As a customer I want to be able to make a purchase without being logged in', function () {
         cy.get('a').contains('Chic vintage DeVille').click()
         cy.get('.store-btn > .btn').click()
-        cy.get('#miniCartSummary > a').click({force:true})
+        cy.get('.store-btn > .btn')
     
         //cy.get('button').contains('Add to cart').click()
-    
-        cy.get('#miniCartDetails > li.checkout-bg > a').should('be.hidden').click({force:true})
-        cy.get('#miniCartSummary > a').contains('Shopping cart').click()
 
-        cy.get('.wc-proceed-to-checkout > a').click()
+        cy.get(':nth-child(3) > .dropdown-toggle > .hidden-xs').click({force:true})
+        cy.contains('Checkout')
+        .click({ force: true });
+
+        //Checkout
+
+        cy.get('.cc-btn').click({force:true})
+        cy.wait(500)
+        cy.get('.wc-proceed-to-checkout > a').click({force:true})
+        
 
         //Billing information 
         cy.get('#customer\\.firstName')
@@ -46,10 +55,8 @@ describe('Product Purchase Test', function ()
         
          cy.get('#billingStateList')
          .select('Alberta')
-        //.should('have.attr', 'name', 'billing\.stateProvince')
-        //.and('have.value', 'Alberta')
 
-
+         
         cy.get('#billingPostalCode')
         .type('123 456')
         .should('have.value', '123 456')
@@ -61,9 +68,11 @@ describe('Product Purchase Test', function ()
         cy.get('#customer\\.billing\\.phone')
         .type('123123123')
         .should('have.value', '123123123')
-       
-         
 
+        //Submit order
+        cy.get('#submitOrder')
+        .click()
+    
         }
 
     ) 
