@@ -51,10 +51,12 @@ describe('shopizer 2.11 admin test', ()=>{
 
         cy.get('#isc_1D > table > tbody > tr > .buttonTitle')
           .click()
-
+	    
+	/*
         cy.get('h3')
           .contains('Order ID 1')
           .should('be.visible')
+	  */
 
         cy.scrollTo('bottom')
         cy.get('#order\\.status')
