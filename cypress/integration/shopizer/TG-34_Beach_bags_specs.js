@@ -1,3 +1,7 @@
+/**
+ * @author Niklas
+ */
+
 describe('/beach-bags', () => {
 
     beforeEach(() => {
@@ -13,42 +17,30 @@ describe('/beach-bags', () => {
     it('has breadcrumb Home -> Beach bags', () => {
         cy
             //Breadcrumb Home
-            .get('.breadcrumb > :nth-child(1) > a')       
+            .get('.breadcrumb > :nth-child(1) > a') 
             .should('have.text', 'Home')
-            .and('have.attr', 'href', 'http://localhost:8080/shop/ref=c:1')
+            .and('have.attr', 'href', 'http://localhost:8080/shop/ref=c:1,1')
 
             //Breadcrumb Beach bags
             .get('.breadcrumb > :nth-child(2) > a')
             .should('have.text', 'Beach bags')
-            .and('have.attr', 'href', 'http://localhost:8080/shop/category/beach-bags.html/ref=c:1')
+            .and('have.attr', 'href', 'http://localhost:8080/shop/category/beach-bags.html/ref=c:1,1')
     })
 
-    it('has Main Menu with Handbags, Beach bags, Laptop bags and Bags', () => {
-        cy
-            .get('#main_h')
-            .should('contain', 'Handbags')
-            .and('contain', 'Beach bags')
-            .and('contain', 'Laptop Bags')
-            .and('contain', 'Bags')    
+	it('has Main Menu whtih menu item Home, Language, Products, Page', () => {
+        cy.get('.nav > :nth-child(1) > .dropdown-toggle')
+        .should('have.attr', 'href', '/shop/')
+        .and('have.text', 'Home')
+
+        cy  .get('.nav > :nth-child(2) > .dropdown-toggle')
+            .should('have.text', 'Language ')
+
+        cy  .get('.nav > :nth-child(3) > .dropdown-toggle')
+            .should('have.text', 'Products ')
+
+        cy  .get('.nav > :nth-child(4) > .dropdown-toggle')
+            .should('have.text', 'Page ')
     })
-
-    it('has functional Main Menu buttons', () => {
-        cy      .get('.mainmenu > nav > ul > :nth-child(1) > a')
-            .should('have.attr', 'href', '/shop/category/handbags.html/ref=c:1,2' )
-
-        cy  .get('.mainmenu > nav > ul > :nth-child(2) > a')
-            .should('have.attr', 'href', '/shop/category/beach-bags.html/ref=c:1' )
-
-        cy  .get('.mainmenu > nav > ul > :nth-child(3) > a')
-            .should('have.attr', 'href', '/shop/category/laptop-bags.html/ref=c:1,3' )
-
-        cy  .get('.mainmenu > nav > ul > :nth-child(4) > a')
-            .should('have.attr', 'href', '/shop/category/bags.html/ref=c:1,4')
-
-
-    })
-
-	
 	
 //********************************************************************************************************	
 
@@ -106,12 +98,12 @@ describe('/beach-bags', () => {
 
 //************************************************************************************************************
 	
-	it('add items to shopping chart', () => {
-
+	xit('add items to shopping chart', () => {
+        //TODO
     })
 
-    it('does more stuff?', () => {
-
+    xit('does more stuff?', () => {
+        //TODO?
     })
 
     
