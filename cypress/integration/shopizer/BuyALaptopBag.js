@@ -3,19 +3,25 @@
 describe('As a Customer i would like to purchase a laptopbag', ()=> {
     it('adds the product to the cart', () => {
 cy.visit("http://localhost:8080") 
-cy      
-        .get(':nth-child(2) > .dropdown-toggle')    
-        .click();
+
 //click Laptopbags
 cy      
         .get('a')
         .contains(" Laptop Bags")
         .click();
+
+cy      .get('.shop-banner-title')
+        .contains('Laptop Bags')
+
 //choose product
+
 cy
         .get('a[productid=8]')
         .contains('Add to cart')
         .click()
+
+cy      
+        .get('.cc-btn').click()
 cy
         .get('#hiddenSearchForm')
         .click({ force: true });
@@ -23,6 +29,9 @@ cy
 cy      
         .contains('Checkout')
         .click({ force: true });
+
+cy      .get('.entry-title')
+        .contains('Review your order')
         
 
 cy      
@@ -66,15 +75,38 @@ cy
         .click()
         .wait(500)
 
+cy      .get('[name="customer.billing.firstName"]')
+        .type('Fuuddddu')
         
-cy      .get('[name="customer.billing.country"]')
-        .select('China')
+cy      .get('[name="customer.billing.lastName"]')
+        .type('Bol Bol')
 
+cy      .get('[name="customer.billing.address"]')
+        .type('Ghar ka Address 0')
+
+cy      .get('[name="customer.billing.city"]')
+        .type('Fumbai')
+
+cy      .get('[name="customer.billing.postalCode"]')
+        .type('46464646')
+
+cy      .get('[name="customer.emailAddress"]')
+        .type('fuddubolbol@gmail.com')
+
+cy      .get('[name="customer.billing.phone"]')
+        .type('666666666')        
+
+cy      .get('[name="customer.billing.country"]')
+        .select('India')
+/*
 cy      .get('[name="customer.billing.stateProvince"]')
-        .type('StockholmsLän')
-        
+        .select('QC')
+   */     
 cy      .get('#submitOrder')
         .click()
+
+cy      .get('h1')
+        .contains('Order completed')
 
 /*
 cy      
