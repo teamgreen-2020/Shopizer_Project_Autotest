@@ -27,6 +27,7 @@
 import { Agent } from "http"
 import { watchFile } from "fs"
 
+
 Cypress.Commands.add('fillAndVerifyRegistrationForm', () => {
 
     cy
@@ -73,6 +74,18 @@ Cypress.Commands.add('fillAndVerifyRegistrationForm', () => {
         .and('have.attr', 'type', 'password')
         .and('have.value', Cypress.env('password'))
 })
+
+
+Cypress.Commands.add('fetchUser', (userName, psw) => {
+    cy.request('POST', '/api/v1/private/login', {
+      password: psw,
+      username: userName
+    })
+    .its('body')
+    .then((res) => {
+        return res;
+    })
+  }) 
 
 
 Cypress.Commands.add('customerLoginAPI', (user, psw) => {
