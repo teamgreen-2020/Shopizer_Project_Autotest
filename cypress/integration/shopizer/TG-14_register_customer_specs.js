@@ -1,5 +1,5 @@
 /**
- * Author: Niklas
+ * @author Niklas
  */
 
 describe('TG-14 Som en kund vill jag kunna registrera mig', () => {
@@ -30,7 +30,7 @@ describe('TG-14 Som en kund vill jag kunna registrera mig', () => {
         cy.contains('h3', 'Personal information')
     })
 
-    it('requires first name', () => {
+    xit('requires first name', () => {
         cy
              //submit form with blank first name field
             .get('#firstName')
@@ -60,12 +60,12 @@ describe('TG-14 Som en kund vill jag kunna registrera mig', () => {
             .and('have.text', 'Unable to complete registration, please try again later')
     })
 
-    it('rejects invalid email address', () => {
+    xit('rejects invalid email address', () => {
         cy
             //submit form with invalid email
             .get('#emailAddress')
             .clear()
-            .type('badFoormedEmail.com{enter}')
+            .type('invalidEmail.com{enter}')
         cy
             //verify registration rejected
             .location('pathname')
