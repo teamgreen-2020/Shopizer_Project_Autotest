@@ -10,7 +10,7 @@ describe('Product Purchase Test', function ()
     })
     //Add to cart 
     it ('As a customer I want to be able to make a purchase without being logged in', function () {
-        cy.get('a').contains('Chic vintage DeVille').click()
+        cy.get('a').contains('Vintage laptop bag').click()
         cy.get('.store-btn > .btn').click()
         cy.get('.store-btn > .btn')
     
@@ -72,6 +72,14 @@ describe('Product Purchase Test', function ()
         //Submit order
         cy.get('#submitOrder')
         .click()
+
+        //Order completed msg
+        cy.get('h1')
+          .should('contain.text', 'Order completed')
+
+        //thank you msg
+        cy.get('.span12 > :nth-child(1)')
+          .should('contain.text', 'Thank you for ordering from Default store.')
     
         }
 
