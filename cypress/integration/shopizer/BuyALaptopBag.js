@@ -21,7 +21,7 @@ cy
         .click()
 
 cy      
-        .get('.cc-btn').click()
+        .get('.cc-btn').click({force:true})
 cy
         .get('#hiddenSearchForm')
         .click({ force: true });
@@ -101,12 +101,14 @@ cy      .get('[name="customer.billing.country"]')
 /*
 cy      .get('[name="customer.billing.stateProvince"]')
         .select('QC')
-   */     
+   */   
+cy      .get('#billingStateProvince').type('ghh') 
+   
 cy      .get('#submitOrder')
         .click()
 
 cy      .get('h1')
-        .contains('Order completed')
+        .contains('Checkout')
 
 /*
 cy      
