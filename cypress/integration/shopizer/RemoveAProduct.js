@@ -7,19 +7,19 @@ cy.visit("http://localhost:8080")
 cy      
         .get('a')
         .contains(" Laptop Bags")
-        .click();
+        .click({force:true});
 
 
 cy      .get('#productsContainer > .col-md-4 > .product-content > .store-btn > .store-btn-addtocart > .addToCart')
-        .click()
+        .click({force:true})
 
 cy
         .get('a[productid=8]')
-        .contains('Add to cart')
-        .click()
+        .contains('Add to cart',{timeout:5000})
+        .click({force:true})
 
 cy      .get('.cc-btn')
-        .click()
+        .click({force:true})
 
 cy
         .get('#hiddenSearchForm')
