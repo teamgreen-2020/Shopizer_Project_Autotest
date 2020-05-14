@@ -9,6 +9,10 @@ cy
         .contains(" Laptop Bags")
         .click();
 
+cy      .get('#productsContainer > .col-md-4 > .thumbnail')
+        .should('not.have.value')
+        .and('be.visible')
+
 
 cy      .get('#productsContainer > .col-md-4 > .product-content > .store-btn > .store-btn-addtocart > .addToCart')
         .click()
@@ -19,7 +23,7 @@ cy
         .click()
 
 cy      .get('.cc-btn')
-        .click()
+        .click({force:true})
 
 cy
         .get('#hiddenSearchForm')
@@ -43,7 +47,7 @@ cy
 
 cy      
         .get(':nth-child(2) > td > .amount')
-        .contains('USD156.00')
+        .should('contain.text', '156,00 kr')
 
 cy      
         .get('.buttons-cart > [href="#"]')
@@ -51,7 +55,7 @@ cy
 
 cy      
         .get(':nth-child(1) > td > .amount')
-        .contains('USD78.00')
+        .should('contain.text', '78,00 kr')
 
 cy
         .get('.wc-proceed-to-checkout > a')
