@@ -1,6 +1,6 @@
 //As a customer i would like to add a Laptopbag to the cart so that i can purchase it and checkout
 
-describe('As a Customer i would like to purchase a laptopbag', ()=> {
+describe('As a Customer i would like to purchase a handbag', ()=> {
         it('adds the product to the cart', () => {
     cy.visit("http://localhost:8080")
     cy.clearCookies()
