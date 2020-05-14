@@ -10,7 +10,7 @@ describe('Product Purchase Test', function ()
     })
     //Add to cart 
     it ('As a customer I want to be able to make a purchase without being logged in', function () {
-        cy.get('a').contains('Vintage beach bag').click()
+        cy.get('a').contains('Retro style bag').click()
         cy.get('.store-btn > .btn').click()
         //cy.get('.store-btn > .btn')
     
