@@ -147,7 +147,7 @@ Cypress.Commands.add('customerLoginAPI', (user, psw) => {
 //********************************************************************************* */
 
 /**
- * Author: Aris
+ * @author Aris
  */ 
 
 // Admin inloggningsuppgifter till TG-26 och TG-13
