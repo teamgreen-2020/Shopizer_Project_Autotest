@@ -1,27 +1,33 @@
 //As a customer i would like to add a Laptopbag to the cart so that i can purchase it and checkout
 
-describe('As a Customer i would like to purchase a laptopbag', ()=> {
+describe('As a Customer i would like to purchase a handbag', ()=> {
         it('adds the product to the cart', () => {
-    cy.visit("http://localhost:8080") 
+    cy.visit("http://localhost:8080")
+    cy.clearCookies()
+    cy.reload()
     
     //click Laptopbags
     cy      
             .get('a')
-            .contains(" Laptop Bags")
+            .contains("Handbag")
             .click();
     
-    cy      .get('.shop-banner-title')
-            .contains('Laptop Bags')
+    cy      .get('#productsContainer > [data-id="10"]')
+            .click()
     
     //choose product
     
-    cy
+    /* 
+   cy
             .get('a[productid=8]')
             .contains('Add to cart')
             .click()
+         */   
+    cy      .get('.store-btn > .btn')
+            .click()
     
-    cy      
-            .get('.cc-btn').click()
+    /*cy      
+            .get('.cc-btn').click({force:true}) */
     cy
             .get('#hiddenSearchForm')
             .click({ force: true });
@@ -36,7 +42,7 @@ describe('As a Customer i would like to purchase a laptopbag', ()=> {
     
     cy      
             .get('.wc-proceed-to-checkout > a')
-            .click()
+            .click({orce:true})
             .wait(500)
     //Log in
     cy      
@@ -72,41 +78,54 @@ describe('As a Customer i would like to purchase a laptopbag', ()=> {
     
     cy      
             .get('.wc-proceed-to-checkout > a')
-            .click()
+            .click({force:true})
             .wait(500)
     
     cy      .get('[name="customer.billing.firstName"]')
-            .type('Fuuddddu')
+            .clear()
+            .type('Lady')
             
     cy      .get('[name="customer.billing.lastName"]')
-            .type('Bol Bol')
+            .clear()
+            .type('Gaga')
     
     cy      .get('[name="customer.billing.address"]')
-            .type('Ghar ka Address 0')
+            .clear()
+            .type('sthlm 08')
     
     cy      .get('[name="customer.billing.city"]')
-            .type('Fumbai')
+            .clear()
+            .type('roro')
     
     cy      .get('[name="customer.billing.postalCode"]')
-            .type('46464646')
+            .clear()
+            .type('1234')
     
     cy      .get('[name="customer.emailAddress"]')
+            .clear()
             .type('fuddubolbol@gmail.com')
     
     cy      .get('[name="customer.billing.phone"]')
-            .type('666666666')        
+            .clear()
+            .type('3333')        
     
     cy      .get('[name="customer.billing.country"]')
-            .select('India')
-    /*
-    cy      .get('[name="customer.billing.stateProvince"]')
-            .select('QC')
-       */     
-    cy      .get('#submitOrder')
-            .click()
+            .select('Australia')
     
+    cy      .get('#billingStateList')
+            .select('Tasmania')
+
+    cy       .get('#billingPostalCode')
+             .clear()
+             .type(1245)      
+           
+    cy      .get('#submitOrder')
+            .click({force:true})
+
     cy      .get('h1')
             .contains('Order completed')
+
+         
     
     /*
     cy      
