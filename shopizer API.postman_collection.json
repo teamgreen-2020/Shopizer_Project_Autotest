@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "cd10b1b6-c075-4b9e-8d9f-9f08bc25f0ca",
+		"name": "shopizer API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86b05998-3130-4e57-ae87-cfcd1cd75d93",
+								"exec": [
+									"eval(pm.environment.get('commonTests'))();",
+									"",
+									"pm.test(`Body contains token`, () => pm.expect(pm.response.text()).to.include(\"token\"));",
+									"",
+									"pm.environment.set('user_token', pm.response.json().token);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"password\": \"password\", \"username\": \"admin@shopizer.com\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/private/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"private",
+								"login"
+							],
+							"query": [
+								{
+									"key": "devicePlatform",
+									"value": "UNKNOWN",
+									"disabled": true
+								},
+								{
+									"key": "mobile",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "normal",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "tablet",
+									"value": "false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "69aca1f0-8dc1-432f-bb9b-bcf261baecbc",
+								"exec": [
+									"eval(pm.environment.get('commonTests'))();",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "efb74e28-8adf-4d8c-a29e-8aca432547c2",
+								"exec": [
+									"pm.environment.set('customer_email', 'test63656@test.com')"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n\"emailAddress\": \"{{customer_email}}\",\n  \"billing\": {\n\t\t\"postalCode\": \"H2H 2H2\",\n         \"countryCode\": null,\n                \"firstName\": \"Test\",\n                \"lastName\": \"Testsson\",\n                \"bilstateOther\": null,\n                \"company\": \"2018-12-12\",\n                \"phone\": \"8888888888\",\n                \"address\": \"123 E Street\",\n                \"city\": \"Toronto\",\n                \"stateProvince\": null,\n                \"billingAddress\": false,\n                \"latitude\": null,\n                \"longitude\": null,\n                \"zone\": \"ON\",\n                \"country\": \"CA\"\n  },\n  \"delivery\": {\n\"postalCode\": \"H2H 2H2\",\n                \"countryCode\": null,\n                \"firstName\": \"John\",\n                \"lastName\": \"Doe\",\n                \"bilstateOther\": null,\n                \"company\": \"2018-12-12\",\n                \"phone\": \"8888888888\",\n                \"address\": \"123 E Street\",\n                \"city\": \"Toronto\",\n                \"stateProvince\": null,\n                \"billingAddress\": false,\n                \"latitude\": null,\n                \"longitude\": null,\n                \"zone\": \"ON\",\n                \"country\": \"CA\"\n  },\n\t\t\t\"gender\": null,\n            \"language\": null,\n            \"firstName\": \"John\",\n            \"lastName\": \"Doe\",\n            \"provider\": null,\n            \"storeCode\": null,\n            \"userName\": \"{{customer_email}}\",\n            \"rating\": 0.0,\n            \"ratingCount\": 0,\n            \"password\": \"password\",\n            \"attributes\": [],\n            \"groups\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/private/customer",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"private",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "09d14aec-f070-44e6-bef0-cab9336c4e37",
+								"exec": [
+									"eval(pm.environment.get('commonTests'))();",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded; charset=UTF-8",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/private/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"private",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "19c229ec-f30e-41b2-b79a-65a21910a394",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(`Status code is 202`, () => pm.response.to.have.status(202))",
+									"",
+									"pm.test(`Response time is less than 500ms`, () =>",
+									"    pm.expect(pm.response.responseTime).to.be.below(500));",
+									"",
+									"pm.test(`Response contains orders`, () =>",
+									"    pm.expect(pm.response.text()).to.include(\"orders\"));",
+									"",
+									"pm.test(`Orders contains elements`, () => {",
+									"    pm.expect(jsonData.orders).to.be.an('array').that.is.not.empty;",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/private/orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"private",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product{id}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "23989949-6d1a-45db-be3e-9b34ba24af2b",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"eval(pm.environment.get('commonTests'))();",
+									"",
+									"pm.test(`id should equal 10`, () => pm.expect(jsonData.id).to.eql(10));",
+									"",
+									"pm.test(`price should equal 60.00`, () =>",
+									"    pm.expect(jsonData.price).to.eql(60.00));",
+									"",
+									"pm.test(`canBePurchased should be true`, () =>",
+									"    pm.expect(jsonData.canBePurchased).to.be.true);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/products/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d706ecd2-d6a6-4ea8-940c-d6e3db8e2143",
+								"exec": [
+									"//pm.environment.set('customer_email', 'test6@test.com');",
+									"pm.environment.set('customer_password', 'password');"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "9ebf48bb-efe4-4eb8-9e74-31988d08d46f",
+								"exec": [
+									"eval(pm.environment.get('commonTests'))();",
+									"",
+									"pm.test(`Body contains token`, () => pm.expect(pm.response.text()).to.include(\"token\"));",
+									"",
+									"pm.environment.set('customer_token', pm.response.json().token);",
+									"pm.environment.set('customer_id', pm.response.json().id)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "password",
+								"value": "password12",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "username",
+								"value": "tolvan@mailinator.com",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"{{customer_password}}\",\n\t\"username\": \"{{customer_email}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/customer/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"customer",
+								"login"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "{{customer_password}}",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "{{customer_email}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f0603030-d1b0-478c-9942-e9f22d86251c",
+								"exec": [
+									"eval(pm.environment.get('commonTests'))();",
+									"",
+									"pm.test(\"Body includes tolvan@mailinator.com\", () =>",
+									"    pm.expect(pm.response.text()).to.include(\"tolvan@mailinator.com\"));",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{customer_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/private/customers?count=5&start=0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"private",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "5"
+								},
+								{
+									"key": "start",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
