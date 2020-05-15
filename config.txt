@@ -1,0 +1,28 @@
+node ('master') {
+    
+    stage ('Get git Repository') {
+        
+        git 'https://github.com/teamgreen-2020/Shopizer_Project_Autotest.git' 
+    
+    }
+    
+    stage ('Run Shopizer Postman API test') {
+        
+        bat label: 'Postman test', script: 'C:\\Users\\arist\\AppData\\Roaming\\npm\\newman run https://www.getpostman.com/collections/f7c42751208ff4b5187a -e Shopizer.postman_environment.json'
+        
+    }
+    
+    stage ('Run mvn test unit test') {
+    
+       bat label: 'tomas fork', script: '''cd C:\\\\Users\\arist\\shopizer
+        mvn test
+        '''
+    }
+    
+    stage ('Run all the test cypress') {
+    
+        bat label: 'Run test', script: 'npx cypress run' 
+    
+    }
+    
+}
